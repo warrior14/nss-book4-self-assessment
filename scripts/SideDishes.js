@@ -1,6 +1,6 @@
 import { getSides, setSide } from "./database.js"
 
-const sideDishes = getSides()
+const sides = getSides()
 
 document.addEventListener("change", (event) => {
     if (event.target.name === "sideDish") {
@@ -8,19 +8,23 @@ document.addEventListener("change", (event) => {
     }
 })
 
-// Requirement: The radio input elements that this component funcion renders must all have a name of "sideDish"
+
+
 export const Sides = () => {
-    let html = "<ul>"
+    let html = "<ul>";
 
-    const listItems = sideDishes.map(dish => {
+    const listItems = sides.map(side => {
         return `<li>
-            <input type="radio" />
+            <input type="radio" name="sideDish" value="${side.id}" /> ${side.title}
         </li>`
-    })
+    });
 
-    html += listItems.join("")
-    html += "</ul>"
+    html += listItems.join("");
+    html += "</ul>";
 
-    return html
-}
+    return html;
+    
+};
 
+
+// Requirement: The radio input elements that this component funcion renders must all have a name of "sideDish"

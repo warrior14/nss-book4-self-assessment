@@ -1,6 +1,6 @@
 describe('Test the display of all options', () => {
     it('Contains the main entrees', () => {
-        cy.visit('http://127.0.0.1:8080')
+        cy.visit('http://localhost:5000')
 
         cy.get(".choices__base").contains("Hummus and Hot Sauce")
         cy.get(".choices__base").contains("Chicken Fried Lamb Kabob")
@@ -15,7 +15,7 @@ describe('Test the display of all options', () => {
     })
 
     it('Contains the vegetable choices', () => {
-        cy.visit('http://127.0.0.1:8080')
+        cy.visit('http://localhost:5000')
 
         cy.get(".choices__veggies").contains("Okra")
         cy.get(".choices__veggies").contains("Collard Greens")
@@ -29,7 +29,7 @@ describe('Test the display of all options', () => {
     })
 
     it('Contains the side dishes', () => {
-        cy.visit('http://127.0.0.1:8080')
+        cy.visit('http://localhost:5000')
 
         cy.get(".choices__sides").contains("Chicken Fried Steak Poppers")
         cy.get(".choices__sides").contains("Bacon")
@@ -50,7 +50,7 @@ describe('Generated input fields', () => {
 
 describe('Tests purchasing a full meal', () => {
     it('Records new purchases', () => {
-        cy.visit('http://127.0.0.1:8080')
+        cy.visit('http://localhost:5000')
 
         const baseOption = cy.get(".choices__base").contains("Hot Chicken Greek Salad")
 

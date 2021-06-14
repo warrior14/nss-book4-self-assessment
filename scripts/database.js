@@ -1,15 +1,15 @@
 const database = {
     entrees: [
-        { name: "Hummus and Hot Sauce", price: 6.00 },
-        { name: "Chicken Fried Lamb Kabob", price: 14.25 },
-        { name: "Hot Chicken Greek Salad", price: 10.50 },
-        { name: "Brussel Sprout Moussaka", price: 11.50 },
-        { name: "Okrakopita", price: 8.40 },
-        { name: "Fried Onion and Grape Leaves", price: 6.95 },
-        { name: "Chess Baklava", price: 5.30 },
-        { name: "Gyro Biscuits", price: 8.95 },
-        { name: "Black Eye Pea Falafel", price: 7.80 },
-        { name: "Pecan Pastitsio", price: 12.49 }
+        { id: 1, name: "Hummus and Hot Sauce", price: 6.00 },
+        { id: 2, name: "Chicken Fried Lamb Kabob", price: 14.25 },
+        { id: 3, name: "Hot Chicken Greek Salad", price: 10.50 },
+        { id: 4, name: "Brussel Sprout Moussaka", price: 11.50 },
+        { id: 5, name: "Okrakopita", price: 8.40 },
+        { id: 6, name: "Fried Onion and Grape Leaves", price: 6.95 },
+        { id: 7, name: "Chess Baklava", price: 5.30 },
+        { id: 8, name: "Gyro Biscuits", price: 8.95 },
+        { id: 9, name: "Black Eye Pea Falafel", price: 7.80 },
+        { id: 10, name: "Pecan Pastitsio", price: 12.49 }
     ],
     veggies: [
         { id: 1, type: "Okra", price: 2.65 },
@@ -31,5 +31,77 @@ const database = {
         { id: 6, title: "Mini Souvlaki", price: 5.20 }
     ],
     purchases: [],
-    comboChoices: {},
+
+
+    comboChoices: {}
 }
+
+
+
+
+
+
+
+// get functions
+
+export const getVeggies = () => {
+    return database.veggies.map(veggie => ({...veggie}));
+};
+
+
+export const getPurchases = () => {
+    return database.purchases.map(purchase => ({...purchase}));
+} 
+
+export const getSides = () => {
+    return database.sides.map(side => ({...side}))
+
+};
+
+export const getEntrees = () => {
+    return database.entrees.map(entree => ({...entree}));
+}
+
+
+
+
+// these are the set functions
+export const setSide = (id) => {
+    database.comboChoices.sideId = id;
+};
+
+export const setEntree = (id) => {
+    database.comboChoices.entreeId = id;
+};
+
+export const setVeggie = (id) => {
+    database.comboChoices.veggieId = id;
+};
+
+
+
+
+
+
+
+// the function that adds to temporary state 
+
+export const addPurchase = () => {
+    
+    const newPurchase = {...database.comboChoices}
+
+    const lastIndex = database.purchases.length - 1
+
+    newPurchase.id = lastIndex >= 0 ? database.purchases[lastIndex].id + 1 : 1
+
+    newPurchase.timestamp = Date.now()
+
+    console.log('new purchase', newPurchase);
+    database.purchases.push(newPurchase)
+
+  
+    database.comboChoices = {}
+
+
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+};
